@@ -9,20 +9,29 @@
 </header>
   <main class="chatbox-popup__main">
     <div id="welcome-message">
-      Hola, soy tu asistente virtual, ¿en qué puedo ayudarte?
     </div>
+
     <app-chat-messages [messages]="messages"></app-chat-messages>
     <app-typing-indicator [show]="typing"></app-typing-indicator>
     <div class="voice-call-hint">
   <small>Puedes realizar una llamada de voz con nuestro asistente virtual para una mejor atención personalizada.</small>
 </div>
-<button (click)="toggleElevenLabs()" class="elevenlabs-btn">{{ showElevenLabs ? 'Cerrar llamada' : 'Iniciar llamada' }}</button>
+
     <button *ngIf="showElevenLabs" (click)="toggleElevenLabs()" class="close-elevenlabs-btn chat-close-floating">&times;</button>
     <div *ngIf="showElevenLabs" class="elevenlabs-widget-container" #elevenLabsContainer>
       <elevenlabs-convai agent-id="agent_2501k1dqjhz2f7tbd422yzpk2jjg"></elevenlabs-convai>
     </div>
   </main>
-  <footer class="chatbox-popup__footer">
     <app-chat-input [form]="askForm" (send)="sendAskSubmit()" (typing)="senderTyping($event)"></app-chat-input>
-  </footer>
+    <div class="chat-quick-actions">
+      <a href="https://drive.google.com/uc?export=download&id=18-XI9MWgABdq0f4qTz3_nc8eZd3xEaye" target="_blank" class="quick-action-btn">
+        Descargar documento PDF
+      </a>
+      <a href="https://mapaoficinascert.appspot.com" target="_blank" class="quick-action-btn">
+        Buscar oficinas cercanas
+      </a>
+      <button (click)="toggleElevenLabs()" class="quick-action-btn" title="Llamada de voz" aria-label="Llamada de voz">
+        Llamada de voz
+      </button>
+    </div>
 </div>
