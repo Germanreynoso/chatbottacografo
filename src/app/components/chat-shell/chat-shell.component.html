@@ -1,28 +1,26 @@
-<div class="chat-shell">
+<div class="chat-shell" #chatShellContainer>
   <header class="chatbox-popup__header">
-    <aside style="flex: 2">
-      <span class="chatbox-popup__avatar">
-  <img src="assets/image2.png" alt="Logo" class="avatar-img" />
-</span>
-    </aside>
-    <aside style="flex: 8; text-align: center">
-      <h1>Valleseco</h1>
-      Asistente (Online)
-    </aside>
-    <aside style="flex: 2; text-align: right">
-      <button class="chatbox-close" (click)="onClose()" title="Cerrar" style="background: none; border: none; font-size: 22px; cursor: pointer; color: #888;">
-        &times;
-      </button>
-    </aside>
-  </header>
+  <div class="header-title-center">
+    <h1>Asistente virtual tacógrafos</h1>
+  </div>
+  <button class="chatbox-close" (click)="onClose()" title="Cerrar" aria-label="Cerrar chat">
+    &times;
+  </button>
+</header>
   <main class="chatbox-popup__main">
     <div id="welcome-message">
-      Facilitamos la comunicación directa y sencilla <br />para que puedas informarte.<br />
-      Pregúntanos lo que necesites. <br />
-      Estamos aquí para ayudarte en todo momento.
+      Hola, soy tu asistente virtual, ¿en qué puedo ayudarte?
     </div>
     <app-chat-messages [messages]="messages"></app-chat-messages>
     <app-typing-indicator [show]="typing"></app-typing-indicator>
+    <div class="voice-call-hint">
+  <small>Puedes realizar una llamada de voz con nuestro asistente virtual para una mejor atención personalizada.</small>
+</div>
+<button (click)="toggleElevenLabs()" class="elevenlabs-btn">{{ showElevenLabs ? 'Cerrar llamada' : 'Iniciar llamada' }}</button>
+    <button *ngIf="showElevenLabs" (click)="toggleElevenLabs()" class="close-elevenlabs-btn chat-close-floating">&times;</button>
+    <div *ngIf="showElevenLabs" class="elevenlabs-widget-container" #elevenLabsContainer>
+      <elevenlabs-convai agent-id="agent_2501k1dqjhz2f7tbd422yzpk2jjg"></elevenlabs-convai>
+    </div>
   </main>
   <footer class="chatbox-popup__footer">
     <app-chat-input [form]="askForm" (send)="sendAskSubmit()" (typing)="senderTyping($event)"></app-chat-input>

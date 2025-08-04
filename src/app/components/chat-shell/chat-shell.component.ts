@@ -1,12 +1,4 @@
-import { Component } from '@angular/core';
-
-// @Component({
-//   selector: 'app-chat-shell',
-//   standalone: true,
-//   templateUrl: './chat-shell.component.html',
-//   styleUrls: ['./chat-shell.component.css'],
-// })
-import { EventEmitter, Output, inject } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, EventEmitter, Output, inject, ElementRef, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ChatMessagesComponent } from '../chat-messages/chat-messages.component';
@@ -28,17 +20,54 @@ import { getSessionId } from '../../services/session.util';
   ],
   templateUrl: './chat-shell.component.html',
   styleUrls: ['./chat-shell.component.css'],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class ChatShellComponent {
+export class ChatShellComponent implements AfterViewInit, OnDestroy {
+  @ViewChild('elevenLabsContainer') elevenLabsContainer!: ElementRef;
+  @ViewChild('chatShellContainer', { static: true }) chatShellContainer!: ElementRef;
+  private clickListener: EventListener | null = null;
   @Output() close = new EventEmitter<void>();
 
   public messages: IMessage[] = [];
   public askForm: FormGroup;
   public typing = false;
+  public showElevenLabs = false;
 
   private _chatMessageService = inject(ChatMessageService);
   private _fb = inject(FormBuilder);
   private _needToScroll = false;
+
+  toggleElevenLabs() {
+    this.showElevenLabs = !this.showElevenLabs;
+    if (this.showElevenLabs) {
+      setTimeout(() => this.addClickOutsideListener(), 0);
+    } else {
+      this.removeClickOutsideListener();
+    }
+  }
+
+  addClickOutsideListener() {
+    this.clickListener = (event: Event) => {
+      const chatContainer = this.chatShellContainer?.nativeElement;
+      if (chatContainer && event.target instanceof Node && !chatContainer.contains(event.target)) {
+        this.showElevenLabs = false;
+        this.removeClickOutsideListener();
+      }
+    };
+    document.addEventListener('mousedown', this.clickListener);
+  }
+
+  removeClickOutsideListener() {
+    if (this.clickListener) {
+      document.removeEventListener('mousedown', this.clickListener);
+      this.clickListener = null;
+    }
+  }
+
+  ngAfterViewInit() {}
+  ngOnDestroy() {
+    this.removeClickOutsideListener();
+  }
 
   constructor() {
     this.askForm = this._fb.group({
