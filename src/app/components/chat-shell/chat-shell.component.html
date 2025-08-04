@@ -1,43 +1,33 @@
-<div class="chat-shell" #chatShellContainer>
-  <header class="chatbox-popup__header">
-  <div class="header-title-center">
-    <h1>Asistente Virtual</h1>
-    <p class="header-subtitle">Realiza una consulta para obtener atención personalizada y eficiente</p>
-  </div>
-  <button class="chatbox-close" (click)="onClose()" title="Cerrar" aria-label="Cerrar chat">
-    &times;
-  </button>
-</header>
-  <div class="voice-call-hint">
-  <small>Puedes realizar una llamada de voz con nuestro asistente virtual para una mejor atención personalizada.</small>
-</div>
-  <main class="chatbox-popup__main">
-    <div id="welcome-message">
-    </div>
+<div class="chat-shell-redesign">
+  <button class="close-widget-btn" (click)="onClose()" title="Cerrar" aria-label="Cerrar chat">&times;</button>
+  <header class="header-gradient">
+    <h1 class="title">Asistente Virtual</h1>
+    <p class="subtitle">Realiza una consulta para obtener atención personalizada y eficiente</p>
+  </header>
 
-    <app-chat-messages [messages]="messages"></app-chat-messages>
-    <app-typing-indicator [show]="typing"></app-typing-indicator>
-    <button *ngIf="showElevenLabs" (click)="toggleElevenLabs()" class="close-elevenlabs-btn chat-close-floating">&times;</button>
-    <div *ngIf="showElevenLabs" class="elevenlabs-widget-container" #elevenLabsContainer>
-      <elevenlabs-convai agent-id="agent_2501k1dqjhz2f7tbd422yzpk2jjg"></elevenlabs-convai>
-    </div>
-  </main>
+  <div class="input-section">
     <app-chat-input [form]="askForm" (send)="sendAskSubmit()" (typing)="senderTyping($event)"></app-chat-input>
-    <div class="quick-actions-section">
-      <h3 class="quick-actions-title">Acciones rápidas</h3>
-      <div class="chat-quick-actions">
-        <a href="https://drive.google.com/uc?export=download&id=18-XI9MWgABdq0f4qTz3_nc8eZd3xEaye" target="_blank" class="quick-action-btn">
-          Descargar documento PDF
-        </a>
-        <a href="https://mapaoficinascert.appspot.com" target="_blank" class="quick-action-btn">
-          Buscar oficinas cercanas
-        </a>
-        <button (click)="toggleElevenLabs()" class="quick-action-btn" title="Llamada de voz" aria-label="Llamada de voz">
-          Solicitar llamada
-        </button>
-      </div>
+  </div>
+
+  <div class="quick-actions-block">
+    <span class="quick-actions-label">Acciones rápidas</span>
+    <div class="quick-actions-list">
+      <a href="https://drive.google.com/uc?export=download&id=18-XI9MWgABdq0f4qTz3_nc8eZd3xEaye" target="_blank" class="quick-action-card">
+        <span class="checkbox-icon"></span>
+        <span>Descargar documento PDF</span>
+      </a>
+      <a href="https://mapaoficinascert.appspot.com" target="_blank" class="quick-action-card">
+        <span class="checkbox-icon"></span>
+        <span>Buscar oficinas cercanas</span>
+      </a>
+      <button (click)="toggleElevenLabs()" class="quick-action-card" type="button">
+        <span class="checkbox-icon"></span>
+        <span>Solicitar llamada</span>
+      </button>
     </div>
-    <div class="consent-footer">
-      <small>Al conversar, consientes el monitoreo y registro de tus comunicaciones de chat.</small>
-    </div>
+  </div>
+
+  <div class="consent-footer-redesign">
+    <small>Al conversar, consientes el monitoreo y registro de tus comunicaciones de chat.</small>
+  </div>
 </div>

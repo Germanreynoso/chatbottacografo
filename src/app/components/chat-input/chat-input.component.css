@@ -4,6 +4,19 @@
   align-items: flex-end;
 }
 textarea {
+  background: #fff;
+  color: #222;
+  border-radius: 8px;
+  border: 1.5px solid #e6ecfa;
+  padding: 12px 14px;
+  font-size: 1rem;
+  font-family: inherit;
+  box-shadow: 0 2px 8px rgba(79, 110, 247, 0.04);
+}
+textarea::placeholder {
+  color: #a0aec0;
+  opacity: 1;
+}
   flex: 1;
   resize: none;
   border-radius: 8px;
