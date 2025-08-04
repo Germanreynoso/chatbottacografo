@@ -1,0 +1,19 @@
+<form [formGroup]="form" (ngSubmit)="send.emit()">
+  <div class="chat-input">
+    <textarea
+      formControlName="user_message"
+      rows="2"
+      maxlength="150"
+      placeholder="Escribe tu mensaje aquí..."
+      (keydown)="typing.emit($event)"
+      autofocus
+    ></textarea>
+    <button type="submit" [disabled]="form.invalid">
+      <i class="fa fa-paper-plane" aria-hidden="true"></i>
+    </button>
+  </div>
+  <div class="input-errors">
+    <small *ngIf="form.controls['user_message']?.hasError('required') && form.controls['user_message'].touched" style="color: red">Campo requerido</small>
+    <small *ngIf="form.controls['user_message']?.hasError('minlength') && form.controls['user_message'].touched" style="color: red">Más de 2 caracteres</small>
+  </div>
+</form>

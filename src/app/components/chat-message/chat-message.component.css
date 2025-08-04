@@ -1,0 +1,9 @@
+.user-message {
+  align-self: flex-end;
+  background-color: #dcf8c6;
+  }
+
+  .bot-message {
+  align-self: flex-start;
+  background-color: #f1f0f0;
+  }

@@ -1,0 +1,21 @@
+image: ubuntu:22.04
+
+before_script:
+  - export DEBIAN_FRONTEND=noninteractive
+  - ln -fs /usr/share/zoneinfo/Atlantic/Canary /etc/localtime
+  - apt-get update && apt-get -y install apt-transport-https software-properties-common ssh
+
+stages:
+  - deploy
+
+deploy:
+  stage: deploy
+  script:
+    - mkdir -p ~/.ssh
+    - chmod 0700 ~/.ssh
+    - ssh-keyscan -t rsa -p $SSH_PORT $HOST_IP >> ~/.ssh/known_hosts
+    - echo $SSH_KEY | base64 --decode > ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+    - ssh -i ~/.ssh/id_rsa -v -t -t -p $SSH_PORT $SSH_USER@$HOST_IP "cd /mnt/fs.acens/dockers-pre/docker/docker-compose && docker-compose build --no-cache chatbot_valleseco_front && docker-compose up -d"
+  only:
+    - testing

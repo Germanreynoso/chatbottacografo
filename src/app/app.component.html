@@ -1,0 +1,5 @@
+<button class="chatbox-button" (click)="toogleChat()">
+  <i class="fas fa-comment-dots"></i>
+</button>
+
+<app-chat-shell *ngIf="showChat" (close)="onChatClose()"></app-chat-shell>

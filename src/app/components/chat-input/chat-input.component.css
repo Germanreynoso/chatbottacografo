@@ -1,0 +1,23 @@
+.chat-input {
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+}
+textarea {
+  flex: 1;
+  resize: none;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  padding: 6px 8px;
+}
+button {
+  background: #1a73e8;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

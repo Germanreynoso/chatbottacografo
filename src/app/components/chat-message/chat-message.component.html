@@ -1,0 +1,18 @@
+@for(message of messages; track $index) {
+{{ message.user_message | json }}
+<div
+  class="message"
+  [ngClass]="{
+    'user-message': false,
+    'bot-message': true
+  }"
+>
+  {{ message.user_message ?? message.bot_response }}
+</div>
+<div
+  style="font-size: 12px"
+  [style.text-align]="message.user_message ? 'end' : 'start'"
+>
+  {{ message.created_at }}
+</div>
+}
