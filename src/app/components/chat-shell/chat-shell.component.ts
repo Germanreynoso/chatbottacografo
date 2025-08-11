@@ -48,8 +48,13 @@ export class ChatShellComponent implements AfterViewInit, OnDestroy {
 
   addClickOutsideListener() {
     this.clickListener = (event: Event) => {
-      const chatContainer = this.chatShellContainer?.nativeElement;
-      if (chatContainer && event.target instanceof Node && !chatContainer.contains(event.target)) {
+      const elevenLabsContainer = this.elevenLabsContainer?.nativeElement;
+      if (
+        this.showElevenLabs &&
+        elevenLabsContainer &&
+        event.target instanceof Node &&
+        !elevenLabsContainer.contains(event.target)
+      ) {
         this.showElevenLabs = false;
         this.removeClickOutsideListener();
       }
