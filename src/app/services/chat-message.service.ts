@@ -23,7 +23,7 @@ export class ChatMessageService {
     const headers: HttpHeaders = new HttpHeaders({
       'Content-Type': 'application/json',
     });
-    const url: string = 'https://n8n.icc-e.org/webhook-test/b8f60260-9861-48d9-b97f-9b8be4887f14';
+    const url: string = 'https://n8n.icc-e.org/webhook/d565fa7c-3cf0-4f39-ab9b-1ca66cb75010';
     return this._http.post<IResponseSendMessage>(url, message, { headers });
   }
 }

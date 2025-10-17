@@ -106,11 +106,28 @@ export class ChatShellComponent implements AfterViewInit, OnDestroy {
     };
     this._chatMessageService.sendMessage(payload).subscribe({
       next: (response) => {
-        if (response.ok) {
+        console.log('Response from webhook:', response);
+        console.log('Response data:', response.data);
+        if (response.ok && response.data) {
+          console.log('Data bot_response:', response.data.bot_response);
           this.messages = this.messages.map((message) => {
             if (message.temp_number === temNumber) {
               message.id = response.data.id;
-              message.bot_response = response.data.bot_response;
+              message.bot_response = response.data.bot_response || 'Respuesta vacía';
+              message.create_at = new Date().toLocaleTimeString([], {
+                hour: '2-digit',
+                minute: '2-digit',
+              });
+            }
+            return message;
+          });
+          this._needToScroll = true;
+        } else if (response.output) {
+          // Handle direct output from n8n
+          console.log('Using output field:', response.output);
+          this.messages = this.messages.map((message) => {
+            if (message.temp_number === temNumber) {
+              message.bot_response = response.output || 'Respuesta recibida';
               message.create_at = new Date().toLocaleTimeString([], {
                 hour: '2-digit',
                 minute: '2-digit',

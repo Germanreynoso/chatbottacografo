@@ -5,6 +5,11 @@
     <p class="subtitle">Realiza una consulta para obtener atención personalizada y eficiente</p>
   </header>
 
+  <div class="messages-section">
+    <app-chat-messages [messages]="messages"></app-chat-messages>
+    <app-typing-indicator [show]="typing"></app-typing-indicator>
+  </div>
+
   <div class="input-section">
     <app-chat-input [form]="askForm" (send)="sendAskSubmit()" (typing)="senderTyping($event)"></app-chat-input>
   </div>

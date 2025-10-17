@@ -4,6 +4,7 @@ export interface IResponseSendMessage {
   ok: boolean;
   message: string;
   data: IMessage;
+  output?: string;
 }
 
 export interface IMessage {
