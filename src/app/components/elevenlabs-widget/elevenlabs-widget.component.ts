@@ -13,7 +13,7 @@ declare global {
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `
     <div #widgetContainer class="widget-container">
-      <elevenlabs-convai agent-id="agent_2501k1dqjhz2f7tbd422yzpk2jjg"></elevenlabs-convai>
+      <elevenlabs-convai agent-id="agent_3701k7s9s2bresettenm6eeq75z7"></elevenlabs-convai>
     </div>
   `,
   styles: [`
