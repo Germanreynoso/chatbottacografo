@@ -10,6 +10,7 @@ import { ChatShellComponent } from './components/chat-shell/chat-shell.component
   styleUrl: './app.component.css',
 })
 export class AppComponent {
+  title = 'AsistenteVirtualTacografo';
   public showChat: boolean = false;
 
   toogleChat() {
